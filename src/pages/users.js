@@ -37,7 +37,7 @@ const Users = () => {
             <th scope="row">3</th>
             <td>Peter Smith</td>
             <td>1992</td>
-            <td>Madarsko</td>
+            <td>Maddarsko</td>
             <td>peter.smith@example.com</td>
           </tr>
         </tbody>
