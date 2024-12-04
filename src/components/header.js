@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles.css'; // Import a CSS file for styling (optional)
+import '../styles.css';
 
 const Header = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -30,7 +30,7 @@ const Header = () => {
     <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: '#000' }}>
       <div className="container-fluid">
         <a className="navbar-brand d-flex align-items-center" href="index.html">
-          <img src="../img/logo.png" alt="Logo" width="50" height="50" className="d-inline-block align-text-top" />
+          <img src={require('../img/logo.png')} alt="Logo" width="50px" height="50px" className="d-inline-block align-text-top" />
         </a>
         <button
           className="navbar-toggler"

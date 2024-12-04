@@ -1,16 +1,18 @@
 import logo from './logo.svg';
-import './styles.css';
+import './App.css';
 import RegistrationForm from './components/form.js'
 import Header from './components/header.js';
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Header/>
+    <div>
+      <header>
+        <Header />
         <RegistrationForm />
       </header>
     </div>
+    
   );
 }
 
