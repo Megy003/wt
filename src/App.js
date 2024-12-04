@@ -1,9 +1,8 @@
-import logo from './logo.svg';
-import './App.css';
-import RegistrationForm from './components/form.js'
+import RegistrationForm from './components/form.js';
 import Header from './components/header.js';
 import 'bootstrap/dist/css/bootstrap.css';
 import Footer from './components/footer.js';
+import { Link } from 'react-router-dom';
 
 function App() {
   return (
@@ -11,10 +10,15 @@ function App() {
       <header>
         <Header />
         <RegistrationForm />
-        <Footer/>
+        <Footer />
       </header>
+      <div className="text-center mt-2">
+        {/* Link na stránku users */}
+        <Link to="/users" className="text-muted">
+          Zobraziť všetkých registrovaných užívateľov
+        </Link>
+      </div>
     </div>
-    
   );
 }
 

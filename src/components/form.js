@@ -73,6 +73,7 @@ const RegistrationForm = () => {
       </div>
       <button className='btn mt-2' type="submit">Registrovať</button>
     </form>
+    
   );
 };
 
