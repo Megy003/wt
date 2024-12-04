@@ -1,25 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/header.js';
 import Footer from '../components/footer.js';
 
 const Users = () => {
-  const initialData = [
-    { id: 1, name: 'Ján Novák', year: 1990, country: 'Slovensko', email: 'jan.novak@example.com' },
-    { id: 2, name: 'Anna Horváthová', year: 1985, country: 'Česko', email: 'anna.horvathova@example.com' },
-    { id: 3, name: 'Peter Smith', year: 1992, country: 'Maďarsko', email: 'peter.smith@example.com' },
-    // Môžeš pridať ďalšie údaje
-  ];
-
+  const [users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [sortConfig, setSortConfig] = useState({ key: 'name', direction: 'asc' });
   const itemsPerPage = 2;
 
-  const filteredData = initialData.filter(item =>
-    item.name.toLowerCase().includes(search.toLowerCase()) ||
-    item.country.toLowerCase().includes(search.toLowerCase()) ||
-    item.email.toLowerCase().includes(search.toLowerCase())
-  );
+  // Získať údaje zo servera
+  useEffect(() => {
+    fetch('http://localhost:5000/users') // Zmeňte URL, ak je iná
+      .then((response) => response.json())
+      .then((data) => setUsers(data))
+      .catch((error) => console.error('Chyba pri načítavaní užívateľov:', error));
+  }, []);
+
+  // Filtrovanie dát so zabezpečením proti undefined alebo null
+  const filteredData = users.filter(item => {
+    // Skontrolujte, či dané vlastnosti existujú pred použitím toLowerCase
+    const nameMatch = item.meno ? item.meno.toLowerCase().includes(search.toLowerCase()) : false;
+    const countryMatch = item.stat ? item.stat.toLowerCase().includes(search.toLowerCase()) : false;
+    const emailMatch = item.email ? item.email.toLowerCase().includes(search.toLowerCase()) : false;
+    return nameMatch || countryMatch || emailMatch;
+  });
 
   const sortedData = [...filteredData].sort((a, b) => {
     if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -70,17 +75,17 @@ const Users = () => {
                 #
                 {sortConfig.key === 'id' ? (sortConfig.direction === 'asc' ? ' ↑' : ' ↓') : ''}
               </th>
-              <th scope="col" onClick={() => handleSort('name')}>
+              <th scope="col" onClick={() => handleSort('meno')}>
                 Meno
-                {sortConfig.key === 'name' ? (sortConfig.direction === 'asc' ? ' ↑' : ' ↓') : ''}
+                {sortConfig.key === 'meno' ? (sortConfig.direction === 'asc' ? ' ↑' : ' ↓') : ''}
               </th>
-              <th scope="col" onClick={() => handleSort('year')}>
+              <th scope="col" onClick={() => handleSort('rok_narodenia')}>
                 Rok narodenia
-                {sortConfig.key === 'year' ? (sortConfig.direction === 'asc' ? ' ↑' : ' ↓') : ''}
+                {sortConfig.key === 'rok_narodenia' ? (sortConfig.direction === 'asc' ? ' ↑' : ' ↓') : ''}
               </th>
-              <th scope="col" onClick={() => handleSort('country')}>
+              <th scope="col" onClick={() => handleSort('stat')}>
                 Štát
-                {sortConfig.key === 'country' ? (sortConfig.direction === 'asc' ? ' ↑' : ' ↓') : ''}
+                {sortConfig.key === 'stat' ? (sortConfig.direction === 'asc' ? ' ↑' : ' ↓') : ''}
               </th>
               <th scope="col" onClick={() => handleSort('email')}>
                 Email
@@ -92,9 +97,9 @@ const Users = () => {
             {currentData.map((user) => (
               <tr key={user.id}>
                 <th scope="row">{user.id}</th>
-                <td>{user.name}</td>
-                <td>{user.year}</td>
-                <td>{user.country}</td>
+                <td>{user.meno}</td>
+                <td>{user.rok_narodenia}</td>
+                <td>{user.stat}</td>
                 <td>{user.email}</td>
               </tr>
             ))}

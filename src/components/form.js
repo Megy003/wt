@@ -16,19 +16,39 @@ const RegistrationForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Zabránime reload stránke
     console.log('Registration Data:', formData);
-    // Tu môžeš pridať logiku na odoslanie dát na server alebo validáciu
+
+    try {
+      const response = await fetch('http://localhost:5000/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData), // Odošleme dáta formulára
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(data.message); // Ukážeme správu, ak je úspešné
+      } else {
+        alert('Chyba pri registrácii: ' + data.message);
+      }
+    } catch (error) {
+      console.error('Chyba pri odosielaní dát:', error);
+      alert('Chyba pri komunikácii so serverom.');
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className='form-group' style={{ maxWidth: '400px', margin: '0 auto' }}>
+    <form onSubmit={handleSubmit} className="form-group" style={{ maxWidth: '400px', margin: '0 auto' }}>
       <h2>Registračný formulár</h2>
       <div>
         <label>Meno:</label>
         <input
-          className='form-control'
+          className="form-control"
           type="text"
           name="name"
           value={formData.name}
@@ -39,7 +59,7 @@ const RegistrationForm = () => {
       <div>
         <label>Rok narodenia:</label>
         <input
-          className='form-control'
+          className="form-control"
           type="number"
           name="birthYear"
           value={formData.birthYear}
@@ -52,7 +72,7 @@ const RegistrationForm = () => {
       <div>
         <label>Štát:</label>
         <input
-          className='form-control'
+          className="form-control"
           type="text"
           name="country"
           value={formData.country}
@@ -63,7 +83,7 @@ const RegistrationForm = () => {
       <div>
         <label>Email:</label>
         <input
-          className='form-control'
+          className="form-control"
           type="email"
           name="email"
           value={formData.email}
@@ -71,9 +91,10 @@ const RegistrationForm = () => {
           required
         />
       </div>
-      <button className='btn mt-2' type="submit">Registrovať</button>
+      <button className="btn mt-2" type="submit">
+        Registrovať
+      </button>
     </form>
-    
   );
 };
 
