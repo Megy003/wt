@@ -23,11 +23,12 @@ const RegistrationForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: '400px', margin: '0 auto' }}>
+    <form onSubmit={handleSubmit} className='form-group' style={{ maxWidth: '400px', margin: '0 auto' }}>
       <h2>Registračný formulár</h2>
       <div>
         <label>Meno:</label>
         <input
+          className='form-control'
           type="text"
           name="name"
           value={formData.name}
@@ -38,6 +39,7 @@ const RegistrationForm = () => {
       <div>
         <label>Rok narodenia:</label>
         <input
+          className='form-control'
           type="number"
           name="birthYear"
           value={formData.birthYear}
@@ -50,6 +52,7 @@ const RegistrationForm = () => {
       <div>
         <label>Štát:</label>
         <input
+          className='form-control'
           type="text"
           name="country"
           value={formData.country}
@@ -60,6 +63,7 @@ const RegistrationForm = () => {
       <div>
         <label>Email:</label>
         <input
+          className='form-control'
           type="email"
           name="email"
           value={formData.email}
@@ -67,7 +71,7 @@ const RegistrationForm = () => {
           required
         />
       </div>
-      <button type="submit">Registrovať</button>
+      <button className='btn mt-2' type="submit">Registrovať</button>
     </form>
   );
 };

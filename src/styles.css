@@ -684,3 +684,13 @@ button.btn {
 .content-wrapper {
     padding-bottom: 60px;
 }
+
+form{
+    text-align: center;
+}
+
+form input{
+    border-radius: 25px;
+    margin-left: 1%;
+    min-width: 30%;
+}

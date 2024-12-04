@@ -3,6 +3,7 @@ import './App.css';
 import RegistrationForm from './components/form.js'
 import Header from './components/header.js';
 import 'bootstrap/dist/css/bootstrap.css';
+import Footer from './components/footer.js';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <header>
         <Header />
         <RegistrationForm />
+        <Footer/>
       </header>
     </div>
     
