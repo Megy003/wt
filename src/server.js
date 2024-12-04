@@ -38,7 +38,7 @@ app.post('/register', (req, res) => {
 
   // SQL dopyt na vloženie dát do tabuľky
   const query = `
-    INSERT INTO wt (meno, rok_narodenia, stat, email)
+    INSERT INTO formular (meno, rok_narodenia, stat, email)
     VALUES (?, ?, ?, ?)
   `;
 
@@ -53,7 +53,7 @@ app.post('/register', (req, res) => {
 });
 
 app.get('/users', (req, res) => {
-  const query = 'SELECT id, meno, rok_narodenia, stat, email FROM wt';
+  const query = 'SELECT id, meno, rok_narodenia, stat, email FROM formular';
   db.query(query, (err, results) => {
     if (err) {
       console.error('Chyba pri získavaní užívateľov:', err);
