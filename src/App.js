@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './App.css';
+import './styles.css';
 import RegistrationForm from './components/form.js'
 import Header from './components/header.js';
 
