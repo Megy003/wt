@@ -101,7 +101,6 @@ const Users = () => {
           </tbody>
         </table>
 
-        {/* Stránkovanie */}
         <nav>
           <ul className="pagination justify-content-center">
             {[...Array(totalPages).keys()].map(page => (
